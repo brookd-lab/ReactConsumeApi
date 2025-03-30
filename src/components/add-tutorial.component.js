@@ -48,6 +48,7 @@ export default class AddTutorial extends Component {
       })
       .catch(e => {
         console.log(e);
+        alert("You do not have permission to add");;
       });
   }
 
@@ -98,13 +99,22 @@ export default class AddTutorial extends Component {
               />
             </div>
 
-            <button onClick={this.saveTutorial} className="btn btn-success">
-              Submit
-            </button>
+<Link
+                to={"/tutorials"}
+                className=""
+              >
+                <button
+                  type="submit"
+                  className="badge badge-success"
+                  onClick={this.saveTutorial}
+                >
+                Submit
+                </button>
+              </Link>
              <Link
                             to={"/"}
                             className="ml-2"
-                          ><button className="btn btn-danger">
+                          ><button className="badge badge-danger">
                             Cancel
                             </button>
                           </Link>

@@ -15,7 +15,7 @@ export default class TutorialsList extends Component {
       tutorials: [],
       currentTutorial: null,
       currentIndex: -1,
-      searchTitle: ""
+      searchTitle: "",
     };
   }
 
@@ -27,19 +27,19 @@ export default class TutorialsList extends Component {
     const searchTitle = e.target.value;
 
     this.setState({
-      searchTitle: searchTitle
+      searchTitle: searchTitle,
     });
   }
 
   retrieveTutorials() {
     TutorialDataService.getAll()
-      .then(response => {
+      .then((response) => {
         this.setState({
-          tutorials: response.data
+          tutorials: response.data,
         });
-        console.log(response.data);
+        //console.log(response.data);
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e);
       });
   }
@@ -48,41 +48,41 @@ export default class TutorialsList extends Component {
     this.retrieveTutorials();
     this.setState({
       currentTutorial: null,
-      currentIndex: -1
+      currentIndex: -1,
     });
   }
 
   setActiveTutorial(tutorial, index) {
     this.setState({
       currentTutorial: tutorial,
-      currentIndex: index
+      currentIndex: index,
     });
   }
 
   searchTitle() {
     this.setState({
       currentTutorial: null,
-      currentIndex: -1
+      currentIndex: -1,
     });
 
     TutorialDataService.findByTitle(this.state.searchTitle)
-      .then(response => {
+      .then((response) => {
         this.setState({
-          tutorials: response.data
+          tutorials: response.data,
         });
         console.log(response.data);
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e);
       });
   }
 
   render() {
-    const { searchTitle, tutorials, currentTutorial, currentIndex } = this.state;
+    const { searchTitle, tutorials, currentTutorial, currentIndex } =
+      this.state;
 
     return (
       <div className="list row">
-       
         <div className="col-md-6 mt-3">
           <h4>Employees List</h4>
 
@@ -98,7 +98,10 @@ export default class TutorialsList extends Component {
                   key={index}
                 >
                   <table width="50%">
-                  <tr><td>{tutorial.name}</td><td>{tutorial.age}</td></tr>
+                    <tr>
+                      <td>{tutorial.name}</td>
+                      <td>{tutorial.age}</td>
+                    </tr>
                   </table>
                 </li>
               ))}
@@ -120,18 +123,27 @@ export default class TutorialsList extends Component {
                 </label>{" "}
                 {currentTutorial.age}
               </div>
-              
+
               <Link
                 to={"/tutorials/" + currentTutorial.id}
                 className="badge badge-warning"
               >
                 Edit
               </Link>
+              {!currentTutorial && (
+                <div>
+                  <br />
+                  <p>Please click on an employee...</p>
+                </div>
+              )}
             </div>
           ) : (
             <div>
-              <br />
-              <p>Please click on an employee...</p>
+              {/* <br />
+              <p>Bad Authentication.</p>
+              <Link to={"/"} className="ml-2">
+                <button className="badge badge-info">Return</button>
+              </Link> */}
             </div>
           )}
         </div>

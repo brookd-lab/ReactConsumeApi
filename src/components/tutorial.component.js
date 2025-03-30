@@ -94,6 +94,7 @@ class Tutorial extends Component {
       })
       .catch(e => {
         console.log(e);
+        alert('No permission to update');
       });
   }
 
@@ -113,9 +114,9 @@ class Tutorial extends Component {
 
     return (
       <div>
-        {currentTutorial ? (
+        {currentTutorial?.name !== '' ? (
           <div className="edit-form">
-            <h4>Tutorial</h4>
+            <h4>Employee</h4>
             <form>
               <div className="form-group">
                 <label htmlFor="name">Name</label>
@@ -146,7 +147,7 @@ class Tutorial extends Component {
               Delete
             </button>
             <Link
-                to={"/"}
+                to={"/tutorials"}
                 className=""
               >
                 <button
@@ -158,19 +159,31 @@ class Tutorial extends Component {
                 </button>
               </Link>
             <Link
-                to={"/"}
+                to={"/tutorials"}
                 className="ml-2"
               >
                 <button className="badge badge-info">
                 Cancel
                 </button>
               </Link>
-            <p>{this.state.message}</p>
+            {!currentTutorial && 
+            <div>
+            <br />
+            <p>Please click on an employee...</p>
+          </div>}
           </div>
         ) : (
           <div>
             <br />
-            <p>Please click on an employee...</p>
+            <p>NotFound</p>
+            <Link
+                to={"/"}
+                className="ml-2"
+              >
+                <button className="badge badge-info">
+                Return
+                </button>
+              </Link>
           </div>
         )}
       </div>

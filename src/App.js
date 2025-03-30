@@ -6,6 +6,7 @@ import "./App.css";
 import AddTutorial from "./components/add-tutorial.component";
 import Tutorial from "./components/tutorial.component";
 import TutorialsList from "./components/tutorials-list.component";
+import Login from "./components/login";
 
 class App extends Component {
   render() {
@@ -13,8 +14,13 @@ class App extends Component {
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
           <div className="navbar-nav mr-auto">
+          <li className="nav-item">
+              <Link to={"/"} className="nav-link">
+                Login
+              </Link>
+            </li>
             <li className="nav-item">
-              <Link to={""} className="nav-link">
+              <Link to={"/tutorials"} className="nav-link">
                 Employees
               </Link>
             </li>
@@ -28,7 +34,8 @@ class App extends Component {
 
         <div className="container mt-3">
           <Routes>
-            <Route path="/" element={<TutorialsList/>} />
+            {/* <Route path="/" element={<TutorialsList/>} /> */}
+            <Route path="/" element={<Login />} />
             <Route path="/tutorials" element={<TutorialsList/>} />
             <Route path="/add" element={<AddTutorial/>} />
             <Route path="/tutorials/:id" element={<Tutorial/>} />
